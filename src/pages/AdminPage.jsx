@@ -264,7 +264,7 @@ export default function AdminPage() {
   const [showPass, setShowPass] = useState(false);
   const [authErr, setAuthErr] = useState(false);
 
-  const { products, setProducts } = useProducts();
+  const { products, updateProduct, addProduct: firestoreAdd, deleteProduct: firestoreDelete, resetProducts } = useProducts();
   const [search, setSearch] = useState('');
   const [showAdd, setShowAdd] = useState(false);
   const [confirm, setConfirm] = useState(null);
@@ -286,8 +286,7 @@ export default function AdminPage() {
   }
 
   function saveRow(id, newPrice, newStock) {
-    const updated = products.map(p => p.id === id ? { ...p, price: newPrice, stock: newStock } : p);
-    setProducts(updated);
+    updateProduct(id, newPrice, newStock);
     showToast(`"${products.find(p => p.id === id)?.name}" updated.`, 'success');
   }
 
@@ -297,7 +296,7 @@ export default function AdminPage() {
       title: 'Delete Product?',
       message: `"${name}" will be permanently removed. This cannot be undone.`,
       onConfirm: () => {
-        setProducts(products.filter(p => p.id !== id));
+        firestoreDelete(id);
         setConfirm(null);
         showToast(`"${name}" deleted.`, 'success');
       },
@@ -306,7 +305,7 @@ export default function AdminPage() {
 
   function addProduct(data) {
     const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-    setProducts([...products, { id: newId, ...data }]);
+    firestoreAdd({ id: newId, ...data });
     setShowAdd(false);
     showToast(`"${data.name}" added successfully.`, 'success');
   }
@@ -316,7 +315,7 @@ export default function AdminPage() {
       title: 'Reset to Defaults?',
       message: "This will restore all default products and remove any you've added. Custom changes will be lost.",
       onConfirm: () => {
-        setProducts(DEFAULT_PRODUCTS);
+        resetProducts(products);
         setConfirm(null);
         showToast('Products reset to defaults.', 'success');
       },
