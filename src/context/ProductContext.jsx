@@ -3,7 +3,7 @@ import { collection, onSnapshot, doc, setDoc, deleteDoc, writeBatch } from 'fire
 import { db } from '../firebase';
 
 const ProductContext = createContext();
-const COL = 'products';
+const COL = 'store_products';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
