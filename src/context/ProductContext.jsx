@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, setDoc, deleteDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase';
-import { DEFAULT_PRODUCTS } from '../data/products';
 
 const ProductContext = createContext();
 const COL = 'products';

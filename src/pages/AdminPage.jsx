@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../context/ProductContext';
 import { ADMIN_PASSWORD, CURRENCY } from '../config';
-import { DEFAULT_PRODUCTS } from '../data/products';
 
 const fmt = n => CURRENCY + Number(n).toLocaleString('en-NG', { minimumFractionDigits: 0 });
 const catLabel = c => ({ 'lip-care': 'Lip Care', 'fragrance': 'Fragrance', 'self-care': 'Self Care' }[c] || c);
