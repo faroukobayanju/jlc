@@ -8,6 +8,7 @@ const FILTERS = [
   { key: 'all', label: 'All Items' },
   { key: 'lip-care', label: 'Lip Care' },
   { key: 'fragrance', label: 'Fragrance' },
+  { key: 'self-care', label: 'Self Care' },
 ];
 
 export default function AllProductsPage() {

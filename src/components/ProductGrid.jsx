@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 const PAGE_SIZE = 8;
 
 export default function ProductGrid({ filter = 'all', limit = true }) {
-  const { products } = useProducts();
+  const { products, loading } = useProducts();
   const { addToCart } = useCart();
   const [flashedId, setFlashedId] = useState(null);
 
@@ -19,6 +19,14 @@ export default function ProductGrid({ filter = 'all', limit = true }) {
     addToCart(productId, products);
     setFlashedId(productId);
     setTimeout(() => setFlashedId(null), 1000);
+  }
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-muted)', fontSize: '15px' }}>
+        Loading products…
+      </div>
+    );
   }
 
   if (filtered.length === 0) {

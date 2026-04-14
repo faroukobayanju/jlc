@@ -15,7 +15,8 @@ async function seedDefaults() {
 }
 
 export function ProductProvider({ children }) {
-  const [products, setProducts] = useState(DEFAULT_PRODUCTS);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, COL), snapshot => {
@@ -26,6 +27,7 @@ export function ProductProvider({ children }) {
       const data = snapshot.docs.map(d => d.data());
       data.sort((a, b) => a.id - b.id);
       setProducts(data);
+      setLoading(false);
     });
     return unsub;
   }, []);
@@ -54,7 +56,7 @@ export function ProductProvider({ children }) {
   }
 
   return (
-    <ProductContext.Provider value={{ products, updateProduct, addProduct, deleteProduct, resetProducts }}>
+    <ProductContext.Provider value={{ products, loading, updateProduct, addProduct, deleteProduct, resetProducts }}>
       {children}
     </ProductContext.Provider>
   );

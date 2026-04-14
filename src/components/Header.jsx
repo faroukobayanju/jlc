@@ -5,6 +5,7 @@ const CATS = [
   { key: 'all', label: 'All' },
   { key: 'lip-care', label: 'Lip Care' },
   { key: 'fragrance', label: 'Fragrance' },
+  { key: 'self-care', label: 'Self Care' },
 ];
 
 export default function Header({ activeCategory, onCategoryChange }) {

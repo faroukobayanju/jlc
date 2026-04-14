@@ -5,7 +5,7 @@ import { ADMIN_PASSWORD, CURRENCY } from '../config';
 import { DEFAULT_PRODUCTS } from '../data/products';
 
 const fmt = n => CURRENCY + Number(n).toLocaleString('en-NG', { minimumFractionDigits: 0 });
-const catLabel = c => ({ 'lip-care': 'Lip Care', 'fragrance': 'Fragrance' }[c] || c);
+const catLabel = c => ({ 'lip-care': 'Lip Care', 'fragrance': 'Fragrance', 'self-care': 'Self Care' }[c] || c);
 
 function StockBadge({ stock }) {
   if (stock === 0) return <span className="stock-status stock-out">Sold Out</span>;
@@ -180,6 +180,7 @@ function AddProductModal({ onClose, onAdd }) {
             style={{ width: '100%', padding: '11px 14px', borderRadius: '6px', border: '1.5px solid var(--border)', fontSize: '14px', background: 'white' }}>
             <option value="lip-care">Lip Care</option>
             <option value="fragrance">Fragrance</option>
+            <option value="self-care">Self Care</option>
           </select>
         </div>
         <div className="form-group">

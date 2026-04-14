@@ -240,6 +240,7 @@ header {
 }
 .badge-lip-care { background: #FFE8EE; color: #B04060; }
 .badge-fragrance { background: #EDE8FF; color: #5B40A0; }
+.badge-self-care { background: #E6F4EA; color: #2E7D32; }
 
 .out-of-stock-badge {
   position: absolute; top: 12px; right: 12px;
