@@ -5,21 +5,6 @@ import { DEFAULT_PRODUCTS } from '../data/products';
 
 const ProductContext = createContext();
 const COL = 'products';
-let seeding = false;
-
-async function seedDefaults() {
-  if (seeding) return;
-  seeding = true;
-  try {
-    const batch = writeBatch(db);
-    DEFAULT_PRODUCTS.forEach(p => {
-      batch.set(doc(db, COL, String(p.id)), p);
-    });
-    await batch.commit();
-  } finally {
-    seeding = false;
-  }
-}
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
@@ -27,10 +12,6 @@ export function ProductProvider({ children }) {
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, COL), snapshot => {
-      if (snapshot.empty) {
-        seedDefaults();
-        return;
-      }
       const data = snapshot.docs.map(d => d.data());
       data.sort((a, b) => a.id - b.id);
       setProducts(data);
@@ -56,11 +37,7 @@ export function ProductProvider({ children }) {
     currentProducts.forEach(p => {
       batch.delete(doc(db, COL, String(p.id)));
     });
-    DEFAULT_PRODUCTS.forEach(p => {
-      batch.set(doc(db, COL, String(p.id)), p);
-    });
     await batch.commit();
-    seeding = false;
   }
 
   return (

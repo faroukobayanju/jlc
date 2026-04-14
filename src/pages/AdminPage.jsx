@@ -326,16 +326,16 @@ export default function AdminPage() {
 
   function resetDefaults() {
     setConfirm({
-      title: 'Reset to Defaults?',
-      message: "This will restore all default products and remove any you've added. Custom changes will be lost.",
+      title: 'Clear All Products?',
+      message: "This will permanently delete all products from the store. This cannot be undone.",
       onConfirm: async () => {
         try {
           await resetProducts(products);
           setConfirm(null);
-          showToast('Products reset to defaults.', 'success');
+          showToast('All products cleared.', 'success');
         } catch (e) {
           setConfirm(null);
-          showToast('Reset failed — check your connection.', 'error');
+          showToast('Clear failed — check your connection.', 'error');
         }
       },
     });
@@ -403,7 +403,7 @@ export default function AdminPage() {
               <input type="text" className="search-input" placeholder="Search products…"
                 value={search} onChange={e => setSearch(e.target.value)} />
               <button className="btn btn-primary btn-sm" onClick={() => setShowAdd(true)}>+ Add Product</button>
-              <button className="btn btn-outline btn-sm" onClick={resetDefaults}>Reset to Defaults</button>
+              <button className="btn btn-outline btn-sm" onClick={resetDefaults}>Clear All Products</button>
             </div>
           </div>
           <div style={{ overflowX: 'auto' }}>
