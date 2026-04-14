@@ -286,9 +286,13 @@ export default function AdminPage() {
     setAuthed(false);
   }
 
-  function saveRow(id, newPrice, newStock) {
-    updateProduct(id, newPrice, newStock);
-    showToast(`"${products.find(p => p.id === id)?.name}" updated.`, 'success');
+  async function saveRow(id, newPrice, newStock) {
+    try {
+      await updateProduct(id, newPrice, newStock);
+      showToast(`"${products.find(p => p.id === id)?.name}" updated.`, 'success');
+    } catch (e) {
+      showToast('Save failed — check your connection.', 'error');
+    }
   }
 
   function deleteProduct(id) {
@@ -296,29 +300,43 @@ export default function AdminPage() {
     setConfirm({
       title: 'Delete Product?',
       message: `"${name}" will be permanently removed. This cannot be undone.`,
-      onConfirm: () => {
-        firestoreDelete(id);
-        setConfirm(null);
-        showToast(`"${name}" deleted.`, 'success');
+      onConfirm: async () => {
+        try {
+          await firestoreDelete(id);
+          setConfirm(null);
+          showToast(`"${name}" deleted.`, 'success');
+        } catch (e) {
+          setConfirm(null);
+          showToast('Delete failed — check your connection.', 'error');
+        }
       },
     });
   }
 
-  function addProduct(data) {
+  async function addProduct(data) {
     const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-    firestoreAdd({ id: newId, ...data });
-    setShowAdd(false);
-    showToast(`"${data.name}" added successfully.`, 'success');
+    try {
+      await firestoreAdd({ id: newId, ...data });
+      setShowAdd(false);
+      showToast(`"${data.name}" added successfully.`, 'success');
+    } catch (e) {
+      showToast('Failed to add product — check your connection.', 'error');
+    }
   }
 
   function resetDefaults() {
     setConfirm({
       title: 'Reset to Defaults?',
       message: "This will restore all default products and remove any you've added. Custom changes will be lost.",
-      onConfirm: () => {
-        resetProducts(products);
-        setConfirm(null);
-        showToast('Products reset to defaults.', 'success');
+      onConfirm: async () => {
+        try {
+          await resetProducts(products);
+          setConfirm(null);
+          showToast('Products reset to defaults.', 'success');
+        } catch (e) {
+          setConfirm(null);
+          showToast('Reset failed — check your connection.', 'error');
+        }
       },
     });
   }

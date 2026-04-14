@@ -5,13 +5,20 @@ import { DEFAULT_PRODUCTS } from '../data/products';
 
 const ProductContext = createContext();
 const COL = 'products';
+let seeding = false;
 
 async function seedDefaults() {
-  const batch = writeBatch(db);
-  DEFAULT_PRODUCTS.forEach(p => {
-    batch.set(doc(db, COL, String(p.id)), p);
-  });
-  await batch.commit();
+  if (seeding) return;
+  seeding = true;
+  try {
+    const batch = writeBatch(db);
+    DEFAULT_PRODUCTS.forEach(p => {
+      batch.set(doc(db, COL, String(p.id)), p);
+    });
+    await batch.commit();
+  } finally {
+    seeding = false;
+  }
 }
 
 export function ProductProvider({ children }) {
@@ -53,6 +60,7 @@ export function ProductProvider({ children }) {
       batch.set(doc(db, COL, String(p.id)), p);
     });
     await batch.commit();
+    seeding = false;
   }
 
   return (
