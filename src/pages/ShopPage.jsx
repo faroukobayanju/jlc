@@ -14,6 +14,7 @@ const FILTERS = [
 
 export default function ShopPage() {
   const [filter, setFilter] = useState('all');
+  const [search, setSearch] = useState('');
   const productsRef = useRef(null);
 
   function scrollToProducts() {
@@ -49,7 +50,22 @@ export default function ShopPage() {
               ))}
             </div>
           </div>
-          <ProductGrid filter={filter} />
+          <div className="search-bar-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              className="search-bar-input"
+              placeholder="Search products…"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            {search && (
+              <button className="search-clear" onClick={() => setSearch('')}>×</button>
+            )}
+          </div>
+          <ProductGrid filter={filter} search={search} />
         </div>
       </section>
 
