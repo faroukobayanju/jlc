@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function validProduct(product) {
+      return product.keys().hasOnly([
+          'id',
+          'name',
+          'category',
+          'description',
+          'price',
+          'stock',
+          'image'
+        ])
+        && product.id is int
+        && product.id > 0
+        && product.name is string
+        && product.name.size() > 0
+        && product.name.size() <= 100
+        && product.category in ['lip-care', 'fragrance', 'self-care']
+        && product.description is string
+        && product.description.size() <= 500
+        && product.price is number
+        && product.price >= 0
+        && product.stock is int
+        && product.stock >= 0
+        && product.image is string
+        && product.image.size() <= 900000;
+    }
+
+    match /store_products/{productId} {
+      allow read: if true;
+      allow create, update: if request.auth != null && validProduct(request.resource.data);
+      allow delete: if request.auth != null;
+    }
+  }
+}

@@ -1,10 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 import { useProducts } from '../context/ProductContext';
-import { ADMIN_PASSWORD, CURRENCY } from '../config';
+import { ADMIN_EMAIL, CURRENCY } from '../config';
 
 const fmt = n => CURRENCY + Number(n).toLocaleString('en-NG', { minimumFractionDigits: 0 });
 const catLabel = c => ({ 'lip-care': 'Lip Care', 'fragrance': 'Fragrance', 'self-care': 'Self Care' }[c] || c);
+const errorMessage = e => e?.message || 'check your connection';
+const authErrorText = code => ({
+  'auth/invalid-credential': 'The email or password is incorrect.',
+  'auth/user-not-found': 'No Firebase admin user exists for that email.',
+  'auth/wrong-password': 'The password is incorrect.',
+  'auth/operation-not-allowed': 'Email/password login is not enabled in Firebase Authentication.',
+  'auth/unauthorized-domain': 'This local address is not authorized in Firebase Authentication.',
+  'auth/network-request-failed': 'Firebase Auth could not be reached from this address. Try opening the app with localhost instead of 127.0.0.1.',
+}[code] || 'Could not sign in. Check your admin email and password.');
 
 function StockBadge({ stock }) {
   if (stock === 0) return <span className="stock-status stock-out">Sold Out</span>;
@@ -259,10 +270,11 @@ function useToast() {
 }
 
 export default function AdminPage() {
-  const [authed, setAuthed] = useState(() => sessionStorage.getItem('jlc_admin') === '1');
+  const [authed, setAuthed] = useState(false);
+  const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
-  const [authErr, setAuthErr] = useState(false);
+  const [authErr, setAuthErr] = useState('');
 
   const { products, updateProduct, addProduct: firestoreAdd, deleteProduct: firestoreDelete, resetProducts } = useProducts();
   const [search, setSearch] = useState('');
@@ -270,19 +282,28 @@ export default function AdminPage() {
   const [confirm, setConfirm] = useState(null);
   const { toast, showToast } = useToast();
 
-  function login(e) {
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      setAuthed(Boolean(user));
+      if (user) setAuthErr('');
+    });
+  }, []);
+
+  async function login(e) {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem('jlc_admin', '1');
-      setAuthed(true); setAuthErr(false);
-    } else {
-      setAuthErr(true); setPassword('');
+    setAuthErr('');
+    try {
+      await signInWithEmailAndPassword(auth, email.trim(), password);
+      setPassword('');
+    } catch (err) {
+      console.error('Admin sign in failed:', err);
+      setAuthErr(authErrorText(err.code));
+      setPassword('');
     }
   }
 
-  function logout() {
-    sessionStorage.removeItem('jlc_admin');
-    setAuthed(false);
+  async function logout() {
+    await signOut(auth);
   }
 
   async function saveRow(id, newPrice, newStock) {
@@ -313,13 +334,14 @@ export default function AdminPage() {
   }
 
   async function addProduct(data) {
-    const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+    const numericIds = products.map(p => Number(p.id)).filter(Number.isFinite);
+    const newId = numericIds.length > 0 ? Math.max(...numericIds) + 1 : 1;
     try {
       await firestoreAdd({ id: newId, ...data });
       setShowAdd(false);
       showToast(`"${data.name}" added successfully.`, 'success');
     } catch (e) {
-      showToast('Failed to add product — check your connection.', 'error');
+      showToast(`Failed to add product — ${errorMessage(e)}.`, 'error');
     }
   }
 
@@ -354,14 +376,20 @@ export default function AdminPage() {
           <div style={{ fontSize: '40px', marginBottom: '16px' }}>🔒</div>
           <h2>Admin Login</h2>
           <p>Enter your password to manage the store.</p>
-          {authErr && <div className="auth-error visible">Incorrect password. Please try again.</div>}
+          {authErr && <div className="auth-error visible">{authErr}</div>}
           <form className="auth-form" onSubmit={login}>
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="admin@example.com" autoComplete="username" required />
+            </div>
             <div className="form-group">
               <label>Password</label>
               <div className="password-input-wrap">
                 <input type={showPass ? 'text' : 'password'} value={password}
                   onChange={e => setPassword(e.target.value)}
-                  placeholder="Enter admin password" autoComplete="current-password" />
+                  placeholder="Enter admin password" autoComplete="current-password" required />
                 <button type="button" className="toggle-password" onClick={() => setShowPass(s => !s)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
