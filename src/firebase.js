@@ -13,4 +13,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = initializeFirestore(app, { localCache: memoryLocalCache() });
+export const db = initializeFirestore(app, {
+  localCache: memoryLocalCache(),
+  experimentalForceLongPolling: true,   // avoids QUIC / WebChannel errors on some networks
+  useFetchStreams: false,
+});
+
