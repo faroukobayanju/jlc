@@ -345,7 +345,9 @@ export default function AdminPage() {
       setShowAdd(false);
       showToast(`"${data.name}" added successfully.`, 'success');
     } catch (e) {
-      showToast(`Failed to add product — ${errorMessage(e)}.`, 'error');
+      console.error('addProduct error:', e?.code, e?.message, e);
+      const detail = e?.code || e?.message || 'check your connection';
+      showToast(`Failed to add product — ${detail}.`, 'error');
     }
   }
 
