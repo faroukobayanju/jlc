@@ -131,14 +131,18 @@ function AddProductModal({ onClose, onAdd }) {
     reader.onload = ev => {
       const img = new Image();
       img.onload = () => {
-        const MAX = 400;
+        const MAX = 300;
         let w = img.width, h = img.height;
         if (w > h) { if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; } }
         else { if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; } }
         const canvas = document.createElement('canvas');
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.65);
+        if (dataUrl.length > 400000) {
+          setError('Image is too large even after compression. Please use a smaller image or paste a URL instead.');
+          return;
+        }
         setImageData(dataUrl); setPreview(dataUrl);
       };
       img.src = ev.target.result;
