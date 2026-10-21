@@ -49,10 +49,10 @@ The store checks admin rights in the database, so signing in is not enough. If `
 3. Document ID: paste your UID. Add a field `email` (string) with your email. Save.
 4. On the site, sign out of `/admin` and sign back in.
 
-**Option B, one command** (after step 2 above, with the service account value saved in a local `.env.local` file as `FIREBASE_SERVICE_ACCOUNT_BASE64=...`):
+**Option B, one command.** Use the JSON file you downloaded in step 2:
 
 ```bash
-npm run make-admin -- you@example.com
+npm run make-admin -- you@example.com ~/Downloads/jay-lip-care-ed4d1-firebase-adminsdk-xxxx.json
 ```
 
 ## 5. Deploy the new security rules
