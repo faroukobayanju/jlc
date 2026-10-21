@@ -1,83 +1,22 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import ProductGrid from '../components/ProductGrid';
-import CartSidebar from '../components/CartSidebar';
-
-const FILTERS = [
-  { key: 'all', label: 'All Items' },
-  { key: 'lip-care', label: 'Lip Care' },
-  { key: 'fragrance', label: 'Fragrance' },
-  { key: 'self-care', label: 'Self Care' },
-];
+import { useSearchParams } from 'react-router-dom';
+import Shell from '../components/Shell';
+import Catalog from '../components/Catalog';
+import { CATEGORIES } from '../lib/format';
 
 export default function AllProductsPage() {
-  const [filter, setFilter] = useState('all');
-  const [search, setSearch] = useState('');
+  const [params, setParams] = useSearchParams();
+  const c = params.get('c');
+  const filter = CATEGORIES.some(cat => cat.key === c) ? c : 'all';
+
+  function onFilter(key) {
+    setParams(key === 'all' ? {} : { c: key }, { replace: true });
+  }
 
   return (
-    <>
-      <Header activeCategory={filter} onCategoryChange={setFilter} />
-
-      <div style={{ background: 'var(--white)', padding: '32px 0', borderBottom: '1px solid var(--border)' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Link to="/" style={{ color: 'var(--text-light)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Home
-          </Link>
-          <span style={{ color: 'var(--border)' }}>›</span>
-          <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>All Products</span>
-        </div>
+    <Shell>
+      <div className="page-pad">
+        <Catalog title="All products" titleAs="h1" filter={filter} onFilter={onFilter} limit={false} />
       </div>
-
-      <section className="section">
-        <div className="container">
-          <div className="products-header">
-            <div>
-              <h2 className="section-title">All Products</h2>
-              <p className="section-subtitle">Browse our full collection.</p>
-            </div>
-            <div className="filter-group" role="group" aria-label="Filter by category">
-              {FILTERS.map(({ key, label }) => (
-                <button
-                  key={key}
-                  className={`filter-btn ${filter === key ? 'active' : ''}`}
-                  onClick={() => setFilter(key)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="search-bar-wrap">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-            </svg>
-            <input
-              type="text"
-              className="search-bar-input"
-              placeholder="Search products…"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-            {search && (
-              <button className="search-clear" onClick={() => setSearch('')}>×</button>
-            )}
-          </div>
-          <ProductGrid filter={filter} limit={false} search={search} />
-        </div>
-      </section>
-
-      <CartSidebar />
-
-      <footer>
-        <div className="footer-inner">
-          <div className="footer-logo">JLC</div>
-          <p className="footer-copy">© 2026 JLC. All rights reserved.</p>
-        </div>
-      </footer>
-    </>
+    </Shell>
   );
 }

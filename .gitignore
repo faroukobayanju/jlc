@@ -1,6 +1,11 @@
 node_modules/
 dist/
 .env
-.env.local
+.env.*
+!.env.example
+*service-account*.json
 .DS_Store
 .vercel
+.impeccable/review/
+.impeccable/config.local.json
+.claude/

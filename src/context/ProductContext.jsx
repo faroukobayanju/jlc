@@ -37,8 +37,9 @@ export function ProductProvider({ children }) {
     return unsub;
   }, []);
 
-  async function updateProduct(id, price, stock) {
-    await setDoc(doc(db, COL, productDocId(id)), { id: Number(id), price, stock }, { merge: true });
+  // fields: any of price, stock, discountPercent, discountEndsAt (ms or null).
+  async function updateProduct(id, fields) {
+    await setDoc(doc(db, COL, productDocId(id)), { ...fields, id: Number(id) }, { merge: true });
   }
 
   async function addProduct(product) {

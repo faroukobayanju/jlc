@@ -1,89 +1,92 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { X, Plus, Minus, ShoppingBag } from '@phosphor-icons/react';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductContext';
-import { CURRENCY } from '../config';
-
-function fmt(n) {
-  return CURRENCY + Number(n).toLocaleString('en-NG', { minimumFractionDigits: 0 });
-}
+import { fmt, hideBroken, effectivePrice } from '../lib/format';
+import DeliveryNote from './DeliveryNote';
 
 export default function CartSidebar() {
   const { cart, isOpen, setIsOpen, setCartQty, getSubtotal } = useCart();
   const { products } = useProducts();
   const subtotal = getSubtotal(products);
+  const closeRef = useRef(null);
 
   useEffect(() => {
+    if (!isOpen) return;
+    closeRef.current?.focus();
     function onKey(e) { if (e.key === 'Escape') setIsOpen(false); }
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [setIsOpen]);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, setIsOpen]);
+
+  const lines = cart
+    .map(item => ({ item, p: products.find(pr => pr.id === item.id) }))
+    .filter(l => l.p);
 
   return (
     <>
-      <div
-        className={`cart-overlay ${isOpen ? 'open' : ''}`}
-        onClick={() => setIsOpen(false)}
-      />
-      <aside className={`cart-sidebar ${isOpen ? 'open' : ''}`} aria-label="Shopping cart">
-        <div className="cart-sidebar-header">
-          <h2>Your Cart</h2>
-          <button className="cart-close-btn" onClick={() => setIsOpen(false)} aria-label="Close cart">×</button>
+      <div className={`scrim${isOpen ? ' is-open' : ''}`} onClick={() => setIsOpen(false)} aria-hidden="true" />
+      <aside
+        className={`bag${isOpen ? ' is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="bag-title"
+        inert={isOpen ? undefined : ''}
+      >
+        <div className="bag-head">
+          <h2 id="bag-title" className="display bag-title">Your bag</h2>
+          <button ref={closeRef} className="icon-btn" onClick={() => setIsOpen(false)} aria-label="Close bag">
+            <X size={20} aria-hidden="true" />
+          </button>
         </div>
 
-        <div className="cart-items-list">
-          {cart.length === 0 ? (
-            <div className="cart-empty">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6" />
-              </svg>
-              <p>Your cart is empty.<br />Add something lovely!</p>
+        <div className="bag-lines">
+          {lines.length === 0 ? (
+            <div className="bag-empty">
+              <ShoppingBag size={36} weight="thin" aria-hidden="true" />
+              <p>Your bag is empty.</p>
+              <Link to="/products" className="text-link" onClick={() => setIsOpen(false)}>Browse products</Link>
             </div>
-          ) : cart.map(item => {
-            const p = products.find(pr => pr.id === item.id);
-            if (!p) return null;
-            return (
-              <div className="cart-item" key={item.id}>
-                <img
-                  className="cart-item-img" src={p.image} alt={p.name}
-                  onError={e => { e.target.src = 'https://placehold.co/64x64/E8DDD3/B8926A?text=?'; }}
-                />
-                <div className="cart-item-info">
-                  <div className="cart-item-name">{p.name}</div>
-                  <div className="cart-item-price">{fmt(p.price)} each</div>
-                </div>
-                <div className="cart-item-controls">
-                  <div className="cart-item-total">{fmt(p.price * item.qty)}</div>
-                  <div className="qty-control">
-                    <button className="qty-btn" onClick={() => setCartQty(item.id, item.qty - 1, products)}>−</button>
-                    <span className="qty-value">{item.qty}</span>
-                    <button className="qty-btn" onClick={() => setCartQty(item.id, item.qty + 1, products)} disabled={item.qty >= p.stock}>+</button>
-                  </div>
+          ) : lines.map(({ item, p }) => (
+            <div className="bag-line" key={item.id}>
+              <img className="bag-img" src={p.image} alt="" onError={hideBroken} />
+              <div className="bag-info">
+                <span className="bag-name">{p.name}</span>
+                <span className="bag-each">{fmt(effectivePrice(p))} each</span>
+                <div className="qty" role="group" aria-label={`Quantity of ${p.name}`}>
+                  <button className="qty-btn" onClick={() => setCartQty(item.id, item.qty - 1, products)}
+                    aria-label={item.qty === 1 ? `Remove ${p.name}` : `One less ${p.name}`}>
+                    <Minus size={14} aria-hidden="true" />
+                  </button>
+                  <span className="qty-val" aria-live="polite">{item.qty}</span>
+                  <button className="qty-btn" onClick={() => setCartQty(item.id, item.qty + 1, products)}
+                    disabled={item.qty >= p.stock} aria-label={`One more ${p.name}`}>
+                    <Plus size={14} aria-hidden="true" />
+                  </button>
                 </div>
               </div>
-            );
-          })}
+              <span className="bag-total">{fmt(effectivePrice(p) * item.qty)}</span>
+            </div>
+          ))}
         </div>
 
-        <div className="cart-sidebar-footer">
-          <div className="cart-total">
-            <span>Subtotal</span>
-            <span className="cart-total-amount">{fmt(subtotal)}</span>
-          </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '14px', lineHeight: 1.6 }}>
-            Shipping fee not included — you will be notified of the delivery charge after placing your order.
-          </p>
-          {cart.length > 0 && (
-            <Link
-              to="/checkout"
-              className="btn btn-primary btn-full"
-              onClick={() => setIsOpen(false)}
-            >
-              Proceed to Checkout →
+        {lines.length > 0 && (
+          <div className="bag-foot">
+            <div className="bag-sum">
+              <span>Subtotal</span>
+              <span className="price">{fmt(subtotal)}</span>
+            </div>
+            <DeliveryNote compact />
+            <Link to="/checkout" className="btn btn-solid btn-block" onClick={() => setIsOpen(false)}>
+              Checkout
             </Link>
-          )}
-        </div>
+          </div>
+        )}
       </aside>
     </>
   );
