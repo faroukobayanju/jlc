@@ -2,6 +2,13 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // RBAC: a user is an admin only if a document admins/{uid} exists.
+    // Create it by hand in the Firebase console; clients can never write it.
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
     function validProduct(product) {
       return product.keys().hasOnly([
           'id',
@@ -10,8 +17,13 @@ service cloud.firestore {
           'description',
           'price',
           'stock',
-          'image'
+          'image',
+          'discountPercent',
+          'discountEndsAt'
         ])
+        && (!('discountPercent' in product)
+            || (product.discountPercent is int && product.discountPercent >= 0 && product.discountPercent <= 90))
+        && (!('discountEndsAt' in product) || product.discountEndsAt == null || product.discountEndsAt is int)
         && product.id is int
         && product.id > 0
         && product.name is string
@@ -22,16 +34,59 @@ service cloud.firestore {
         && product.description.size() <= 500
         && product.price is number
         && product.price >= 0
+        && product.price <= 10000000
         && product.stock is int
         && product.stock >= 0
+        && product.stock <= 100000
         && product.image is string
-        && product.image.size() <= 400000;
+        && product.image.size() <= 400000
+        && product.image.matches('^(https://|data:image/(jpeg|png|webp);base64,).*');
     }
 
     match /store_products/{productId} {
       allow read: if true;
-      allow create, update: if request.auth != null && validProduct(request.resource.data);
-      allow delete: if request.auth != null;
+      allow create, update: if isAdmin()
+        && validProduct(request.resource.data)
+        && productId == string(request.resource.data.id);
+      allow delete: if isAdmin();
     }
+
+    // Orders are created and paid only by the server (Admin SDK bypasses rules).
+    // Admins may read them and move a paid order to sent, then received. Nothing else can change.
+    match /orders/{orderId} {
+      allow read: if isAdmin();
+      allow update: if isAdmin()
+        && resource.data.status in ['paid', 'paid_stock_issue']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deliveryStatus', 'sentAt', 'receivedAt', 'updatedAt'])
+        && request.resource.data.deliveryStatus in ['sent', 'received'];
+      allow create, delete: if false;
+    }
+
+    // Timed storefront announcements. Public to read; only admins create or delete.
+    match /announcements/{id} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['message', 'link', 'startsAt', 'endsAt', 'createdAt'])
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 200
+        && request.resource.data.link is string
+        && request.resource.data.link.size() <= 300
+        && (request.resource.data.link == '' || request.resource.data.link.matches('^(https://|/)[^\\s]*$'))
+        && request.resource.data.startsAt is timestamp
+        && request.resource.data.endsAt is timestamp
+        && request.resource.data.endsAt > request.resource.data.startsAt
+        && request.resource.data.endsAt <= request.resource.data.startsAt + duration.value(90, 'd')
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Everything else is denied by default.
   }
 }

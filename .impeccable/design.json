@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T16:03:14+00:00",
+  "title": "Design System: JLC",
+  "extensions": {
+    "colorMeta": {
+      "cream-ground": {
+        "role": "neutral",
+        "displayName": "Cream Ground",
+        "canonical": "#f7f1ea",
+        "oklch": "oklch(96.1% 0.011 72)",
+        "purpose": "Page background under the colour field.",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#28231e",
+          "#443f39",
+          "#625d57",
+          "#857f79",
+          "#a9a49d",
+          "#cecac5",
+          "#efeeed"
+        ]
+      },
+      "blush": {
+        "role": "tertiary",
+        "displayName": "Blush",
+        "canonical": "#ebbcae",
+        "oklch": "oklch(83.3% 0.058 37)",
+        "purpose": "Colour-field blob; bag count badge.",
+        "tonalRamp": [
+          "#120906",
+          "#3b180e",
+          "#5a3429",
+          "#7a5246",
+          "#9f7468",
+          "#c6998b",
+          "#e4c2b8",
+          "#f3edeb"
+        ]
+      },
+      "caramel": {
+        "role": "tertiary",
+        "displayName": "Caramel",
+        "canonical": "#d6a77a",
+        "oklch": "oklch(76.1% 0.082 65)",
+        "purpose": "Colour-field blob; changed-cell border in admin.",
+        "tonalRamp": [
+          "#120902",
+          "#3d1800",
+          "#5d3502",
+          "#7d5327",
+          "#a2764a",
+          "#c99a6e",
+          "#e6c3a3",
+          "#f3ede8"
+        ]
+      },
+      "rose": {
+        "role": "tertiary",
+        "displayName": "Rose",
+        "canonical": "#dca3a0",
+        "oklch": "oklch(76.8% 0.068 22)",
+        "purpose": "Colour-field blob.",
+        "tonalRamp": [
+          "#130807",
+          "#3f1414",
+          "#5f302f",
+          "#804e4c",
+          "#a5706e",
+          "#cc9491",
+          "#e9bfbc",
+          "#f4ecec"
+        ]
+      },
+      "sand": {
+        "role": "tertiary",
+        "displayName": "Sand",
+        "canonical": "#e8d6bf",
+        "oklch": "oklch(88.5% 0.037 74)",
+        "purpose": "Colour-field blob; WhatsApp band glow.",
+        "tonalRamp": [
+          "#0e0a06",
+          "#2f210f",
+          "#4c3d2a",
+          "#6a5b47",
+          "#8e7d68",
+          "#b3a28c",
+          "#d5c8b8",
+          "#f0eeeb"
+        ]
+      },
+      "honey": {
+        "role": "tertiary",
+        "displayName": "Honey",
+        "canonical": "#edc890",
+        "oklch": "oklch(85.2% 0.083 78)",
+        "purpose": "Colour-field blob; sale tag; announcement link.",
+        "tonalRamp": [
+          "#110a02",
+          "#391c00",
+          "#583900",
+          "#78571f",
+          "#9c7a44",
+          "#c29e67",
+          "#e1c69f",
+          "#f2eee8"
+        ]
+      },
+      "espresso": {
+        "role": "secondary",
+        "displayName": "Espresso Ink",
+        "canonical": "#2d2420",
+        "oklch": "oklch(26.9% 0.016 45)",
+        "purpose": "Primary text; Bag, Add, active nav/tab pills, announcement, toast.",
+        "tonalRamp": [
+          "#0d0b09",
+          "#2b221e",
+          "#473d39",
+          "#665b56",
+          "#897e79",
+          "#ada29d",
+          "#d1c8c5",
+          "#efeeed"
+        ]
+      },
+      "walnut": {
+        "role": "neutral",
+        "displayName": "Walnut",
+        "canonical": "#57473d",
+        "oklch": "oklch(41.1% 0.027 54)",
+        "purpose": "Secondary text, labels, inactive nav.",
+        "tonalRamp": [
+          "#0e0a08",
+          "#2f2017",
+          "#4c3c32",
+          "#6a5a4f",
+          "#8e7c71",
+          "#b3a095",
+          "#d5c7bf",
+          "#f0eeec"
+        ]
+      },
+      "taupe": {
+        "role": "neutral",
+        "displayName": "Taupe",
+        "canonical": "#6c5c51",
+        "oklch": "oklch(48.7% 0.027 57)",
+        "purpose": "Tertiary text, placeholders, fine print.",
+        "tonalRamp": [
+          "#0e0a08",
+          "#2e2117",
+          "#4b3c32",
+          "#6a5a4f",
+          "#8d7c71",
+          "#b2a195",
+          "#d5c8bf",
+          "#f0eeec"
+        ]
+      },
+      "deep-caramel": {
+        "role": "primary",
+        "displayName": "Deep Caramel",
+        "canonical": "#8a5f3c",
+        "oklch": "oklch(52.3% 0.075 59)",
+        "purpose": "Primary purchase action, focus, links, sale price, done timeline steps.",
+        "tonalRamp": [
+          "#120903",
+          "#3d1800",
+          "#5c3510",
+          "#7d5330",
+          "#a27552",
+          "#c89a75",
+          "#e6c3a8",
+          "#f3ede9"
+        ]
+      },
+      "deep-caramel-hover": {
+        "role": "primary",
+        "displayName": "Deep Caramel Pressed",
+        "canonical": "#714c2e",
+        "oklch": "oklch(45.1% 0.067 59)",
+        "purpose": "Primary button hover.",
+        "tonalRamp": [
+          "#120904",
+          "#3b1a00",
+          "#5a3618",
+          "#7a5436",
+          "#9e7758",
+          "#c59b7b",
+          "#e3c4ac",
+          "#f3ede9"
+        ]
+      },
+      "caramel-milk": {
+        "role": "neutral",
+        "displayName": "Caramel Milk",
+        "canonical": "#f3e4d6",
+        "oklch": "oklch(92.7% 0.025 66)",
+        "purpose": "Delivery note fill; quantity hover.",
+        "tonalRamp": [
+          "#0d0b08",
+          "#2c2217",
+          "#493d32",
+          "#685b4f",
+          "#8b7e71",
+          "#b0a295",
+          "#d3c8bf",
+          "#f0eeec"
+        ]
+      },
+      "swatch-fallback": {
+        "role": "tertiary",
+        "displayName": "Swatch Fallback",
+        "canonical": "#e0b08a",
+        "oklch": "oklch(79.2% 0.076 60)",
+        "purpose": "Product tint when the photo cannot be sampled.",
+        "tonalRamp": [
+          "#120903",
+          "#3d1800",
+          "#5c350f",
+          "#7d532f",
+          "#a27551",
+          "#c89a74",
+          "#e6c3a8",
+          "#f3ede9"
+        ]
+      },
+      "ok": {
+        "role": "status",
+        "displayName": "Leaf",
+        "canonical": "#2e6b47",
+        "oklch": "oklch(47.7% 0.087 155)",
+        "purpose": "Added, saved, in-stock states.",
+        "tonalRamp": [
+          "#030e07",
+          "#002f0f",
+          "#084d2b",
+          "#2f6c48",
+          "#53906a",
+          "#77b58d",
+          "#abd7b9",
+          "#eaf0ec"
+        ]
+      },
+      "warn": {
+        "role": "status",
+        "displayName": "Amber",
+        "canonical": "#8a5300",
+        "oklch": "oklch(49.4% 0.109 67)",
+        "purpose": "Low stock.",
+        "tonalRamp": [
+          "#140800",
+          "#441200",
+          "#643000",
+          "#864f00",
+          "#ab722f",
+          "#d29755",
+          "#eec194",
+          "#f4ede6"
+        ]
+      },
+      "danger": {
+        "role": "status",
+        "displayName": "Brick",
+        "canonical": "#b3261e",
+        "oklch": "oklch(50.1% 0.178 29)",
+        "purpose": "Errors and destructive actions.",
+        "tonalRamp": [
+          "#1d0101",
+          "#600000",
+          "#860000",
+          "#ac1d17",
+          "#d64a3d",
+          "#ff7161",
+          "#ffaa9a",
+          "#fceae7"
+        ]
+      },
+      "glass": {
+        "role": "material",
+        "displayName": "Glass",
+        "purpose": "Resting fill of every frosted panel."
+      },
+      "glass-strong": {
+        "role": "material",
+        "displayName": "Strong Glass",
+        "purpose": "Bag drawer, modal, summary, auth card, hero card."
+      },
+      "glass-line": {
+        "role": "material",
+        "displayName": "Glass Line",
+        "purpose": "1px white border on glass."
+      },
+      "glass-edge": {
+        "role": "material",
+        "displayName": "Glass Edge",
+        "purpose": "Hairline dividers inside panels."
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "purpose": "Label on ink and caramel fills; solid glass fallback."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero, checkout and WhatsApp band headlines. Width 108%, balanced wrap, max about 12-13ch."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Catalog, FAQ and notice titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Legends, summary, panel, modal, bag and auth titles (18-26px)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text; lead copy at 18px in walnut."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons (15px), nav pills, tabs, field labels. Sentence case."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Every money value; tabular, no wrap."
+      },
+      "fine": {
+        "displayName": "Fine",
+        "purpose": "Meta, hints, footer copy in taupe."
+      }
+    },
+    "glass": {
+      "fill": "rgb(255 255 255 / 0.56)",
+      "fillStrong": "rgb(255 255 255 / 0.72)",
+      "backdropFilter": "blur(22px) saturate(170%)",
+      "border": "1px solid rgb(255 255 255 / 0.75)",
+      "shadow": "0 18px 40px -18px rgb(90 60 40 / 0.28), 0 2px 6px -2px rgb(90 60 40 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.9)",
+      "reducedTransparency": "background: #fff; backdrop-filter: none",
+      "noBackdropSupport": "background: rgb(255 255 255 / 0.92)",
+      "field": {
+        "desktop": "fixed, inset -10vmax, opacity 0.9: radial-gradient(34vmax at 10% 14%, blush), (30vmax at 74% 22%, rose), (30vmax at 96% 8%, caramel), (36vmax at 36% 60%, caramel), (34vmax at 86% 70%, blush), (34vmax at 6% 88%, sand), (22vmax at 56% 40%, honey), each fading to transparent at 60-64%",
+        "mobile": "max-width 760px, inset 0: (70vw at 10% 8%, blush), (70vw at 95% 26%, rose), (80vw at 20% 58%, caramel), (80vw at 90% 84%, sand), (50vw at 60% 46%, honey)"
+      },
+      "swatch": {
+        "source": "src/lib/swatch.js",
+        "method": "16x16 canvas downsample; skip pixels with lightness <0.12 or >0.92 or saturation <0.25; weight by saturation^4; circular mean hue",
+        "output": "hsl(H 72% L) with L clamped 55-70%",
+        "fallback": "#e0b08a",
+        "cardTint": "radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--swatch) 42%, transparent), transparent 72%) over glass",
+        "counterTint": "radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--swatch) 38%, transparent), transparent 75%) over glass"
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel",
+        "value": "0 18px 40px -18px rgb(90 60 40 / 0.28), 0 2px 6px -2px rgb(90 60 40 / 0.08)",
+        "purpose": "All resting glass panels, paired with inset 0 1px 0 white highlight."
+      },
+      {
+        "name": "overlay",
+        "value": "0 30px 70px -24px rgb(90 60 40 / 0.38)",
+        "purpose": "Bag drawer, modals, toast."
+      },
+      {
+        "name": "caramel-lift",
+        "value": "0 10px 24px -10px rgb(138 95 60 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.25)",
+        "purpose": "Primary button at rest."
+      },
+      {
+        "name": "caramel-lift-hover",
+        "value": "0 14px 30px -10px rgb(138 95 60 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.25)",
+        "purpose": "Primary button hover."
+      },
+      {
+        "name": "soft-button",
+        "value": "0 4px 12px -6px rgb(90 60 40 / 0.25)",
+        "purpose": "Soft and ghost buttons."
+      },
+      {
+        "name": "swatch-glow",
+        "value": "0 30px 60px -26px color-mix(in srgb, var(--swatch) 85%, transparent), inset 0 1px 0 #fff",
+        "purpose": "Product card hover and focus-within."
+      },
+      {
+        "name": "swatch-glow-rest",
+        "value": "0 18px 36px -20px color-mix(in srgb, var(--swatch) 75%, transparent), inset 0 1px 0 #fff",
+        "purpose": "Product cards at rest on touch screens (hover: none)."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px rgb(138 95 60 / 0.18)",
+        "purpose": "Focused inputs, selected payment option, current timeline step (5px)."
+      },
+      {
+        "name": "focus-outline",
+        "value": "outline: 2px solid #8a5f3c; outline-offset: 3px",
+        "purpose": "Global :focus-visible."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Single easing for all state transitions."
+      },
+      {
+        "name": "state",
+        "value": "0.2s-0.25s",
+        "purpose": "Colour, background, border and shadow changes on controls."
+      },
+      {
+        "name": "card-lift",
+        "value": "transform 0.45s, box-shadow 0.45s; translateY(-6px)",
+        "purpose": "Product card hover lift (counter cards 0.4s)."
+      },
+      {
+        "name": "media-zoom",
+        "value": "transform 0.7s; scale(1.05)",
+        "purpose": "Product photo on card hover (counter 0.6s)."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.97); Add button scale(0.95)",
+        "purpose": "Active press on buttons."
+      },
+      {
+        "name": "drawer",
+        "value": "transform 0.5s; translateX(calc(100% + 24px)) to none",
+        "purpose": "Bag drawer slide-in."
+      },
+      {
+        "name": "scrim-toast",
+        "value": "opacity/transform 0.3s; toast rises 16px",
+        "purpose": "Scrim fade and toast entry."
+      },
+      {
+        "name": "pulse",
+        "value": "opacity to 0.55 at 50%, 1.6s ease-in-out infinite",
+        "purpose": "Skeleton loading."
+      },
+      {
+        "name": "added-flash",
+        "value": "1200ms",
+        "purpose": "Add button shows Added state."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all animation and transition durations 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "zIndex": [
+      {
+        "name": "bg",
+        "value": -1
+      },
+      {
+        "name": "head",
+        "value": 20
+      },
+      {
+        "name": "scrim",
+        "value": 40
+      },
+      {
+        "name": "drawer",
+        "value": 50
+      },
+      {
+        "name": "modal",
+        "value": 60
+      },
+      {
+        "name": "toast",
+        "value": 70
+      },
+      {
+        "name": "skip-link",
+        "value": 100
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "960px",
+        "purpose": "Checkout and admin layouts stack."
+      },
+      {
+        "name": "phone",
+        "value": "760px",
+        "purpose": "Nav pills hidden, hero card hidden, 2-column grid, head height 62px."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Deep caramel pill for the purchase path (Shop all, Pay, Place order).",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Shop all <svg width=\"18\" height=\"18\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z\"/></svg></button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1px solid transparent; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 15px; font-weight: 650; cursor: pointer; transition: background-color .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s cubic-bezier(0.16,1,0.3,1), transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid #8a5f3c; outline-offset: 3px; } .ds-btn-primary { background: #8a5f3c; color: #fff; box-shadow: 0 10px 24px -10px rgb(138 95 60 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.25); } .ds-btn-primary:hover { background: #714c2e; transform: translateY(-1px); box-shadow: 0 14px 30px -10px rgb(138 95 60 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.25); }"
+    },
+    {
+      "name": "Soft Button",
+      "kind": "button",
+      "refersTo": "button-soft",
+      "description": "Frosted white pill for secondary actions.",
+      "html": "<button class=\"ds-btn-soft\">Order on WhatsApp</button>",
+      "css": ".ds-btn-soft { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; background: rgb(255 255 255 / 0.7); color: #2d2420; border: 1px solid rgb(255 255 255 / 0.9); box-shadow: 0 4px 12px -6px rgb(90 60 40 / 0.25); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 15px; font-weight: 650; cursor: pointer; transition: background-color .25s cubic-bezier(0.16,1,0.3,1), transform .2s; } .ds-btn-soft:hover { background: #fff; } .ds-btn-soft:active { transform: scale(0.97); } .ds-btn-soft:focus-visible { outline: 2px solid #8a5f3c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Add Button",
+      "kind": "button",
+      "refersTo": "button-add",
+      "description": "Espresso pill on product cards; turns caramel on hover, green when added.",
+      "html": "<button class=\"ds-add\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z\"/></svg>Add</button>",
+      "css": ".ds-add { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 0; background: #2d2420; color: #fff; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 14px; font-weight: 650; cursor: pointer; transition: background-color .2s, transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-add:hover { background: #8a5f3c; } .ds-add:active { transform: scale(0.95); } .ds-add:focus-visible { outline: 2px solid #8a5f3c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Frosted white field, 14px radius, caramel focus halo.",
+      "html": "<label class=\"ds-field\"><span>Phone number</span><input placeholder=\"080...\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-field span { font-size: 14px; font-weight: 650; color: #57473d; } .ds-field input { width: 100%; min-height: 50px; padding: 12px 16px; background: rgb(255 255 255 / 0.82); color: #2d2420; border: 1px solid rgb(45 36 32 / 0.14); border-radius: 14px; font: inherit; font-size: 16px; transition: border-color .2s, box-shadow .2s, background-color .2s; } .ds-field input::placeholder { color: #6c5c51; } .ds-field input:focus { outline: 0; background: #fff; border-color: #8a5f3c; box-shadow: 0 0 0 3px rgb(138 95 60 / 0.18); }"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Floating glass pill with category pills and the espresso Bag pill.",
+      "html": "<nav class=\"ds-topbar\"><strong class=\"ds-mark\">jlc</strong><div class=\"ds-links\"><a class=\"ds-link is-active\" href=\"#\">All</a><a class=\"ds-link\" href=\"#\">Lip Care</a><a class=\"ds-link\" href=\"#\">Fragrance</a></div><button class=\"ds-bag\">Bag <span class=\"ds-count\">2</span></button></nav>",
+      "css": ".ds-topbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; height: 56px; padding: 0 10px 0 22px; border-radius: 999px; background: rgb(255 255 255 / 0.56); -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); border: 1px solid rgb(255 255 255 / 0.75); box-shadow: 0 18px 40px -18px rgb(90 60 40 / 0.28), 0 2px 6px -2px rgb(90 60 40 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.9); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; color: #2d2420; } .ds-mark { font-size: 22px; } .ds-links { display: flex; justify-content: center; gap: 4px; } .ds-link { font-size: 14px; font-weight: 600; color: #57473d; padding: 8px 16px; border-radius: 999px; text-decoration: none; transition: background-color .2s, color .2s; } .ds-link:hover { background: rgb(255 255 255 / 0.7); color: #2d2420; } .ds-link.is-active { background: #2d2420; color: #fff; } .ds-link:focus-visible, .ds-bag:focus-visible { outline: 2px solid #8a5f3c; outline-offset: 3px; } .ds-bag { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 0; border-radius: 999px; background: #2d2420; color: #fff; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; transition: transform .2s cubic-bezier(0.16,1,0.3,1); } .ds-bag:hover { transform: translateY(-1px); } .ds-count { min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #ebbcae; color: #2d2420; font-size: 12px; font-weight: 800; display: inline-grid; place-items: center; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Glass card tinted from the top by the product's sampled swatch; lifts and glows in it on hover.",
+      "html": "<article class=\"ds-pcard\" style=\"--swatch: hsl(345 72% 62%)\" tabindex=\"0\"><div class=\"ds-pcard-case\"></div><div class=\"ds-pcard-body\"><h3>Cherry lip gloss</h3><div class=\"ds-pcard-foot\"><span class=\"ds-price\">₦4,500</span><span class=\"ds-sale\">-10%</span></div></div></article>",
+      "css": ".ds-pcard { width: 240px; display: grid; gap: 14px; padding: 10px 10px 16px; border-radius: 22px; background: radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--swatch, #e0b08a) 42%, transparent), transparent 72%), rgb(255 255 255 / 0.56); -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); border: 1px solid rgb(255 255 255 / 0.75); box-shadow: 0 18px 40px -18px rgb(90 60 40 / 0.28), 0 2px 6px -2px rgb(90 60 40 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.9); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; color: #2d2420; transition: transform .45s cubic-bezier(0.16,1,0.3,1), box-shadow .45s cubic-bezier(0.16,1,0.3,1); } .ds-pcard:hover, .ds-pcard:focus-visible { outline: 0; transform: translateY(-6px); box-shadow: 0 30px 60px -26px color-mix(in srgb, var(--swatch, #e0b08a) 85%, transparent), inset 0 1px 0 #fff; } .ds-pcard-case { aspect-ratio: 4 / 5; border-radius: 16px; background: linear-gradient(160deg, color-mix(in srgb, var(--swatch, #e0b08a) 55%, #fff), #fff); } .ds-pcard-body { display: grid; gap: 8px; padding: 0 6px; } .ds-pcard-body h3 { font-size: 16px; font-weight: 700; line-height: 1.3; margin: 0; } .ds-pcard-foot { display: flex; align-items: center; gap: 8px; } .ds-price { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; } .ds-sale { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: #edc890; color: #2d2420; }"
+    },
+    {
+      "name": "Category Tabs",
+      "kind": "chip",
+      "refersTo": "tab",
+      "description": "Glass pill track of category tabs; active tab is espresso.",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tab is-active\">All</button><button class=\"ds-tab\">Lip Care</button><button class=\"ds-tab\">Self Care</button></div>",
+      "css": ".ds-tabs { display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px; background: rgb(255 255 255 / 0.56); -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); border: 1px solid rgb(255 255 255 / 0.75); box-shadow: 0 18px 40px -18px rgb(90 60 40 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.9); } .ds-tab { min-height: 40px; padding: 0 18px; border: 0; border-radius: 999px; background: none; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 14px; font-weight: 650; color: #57473d; cursor: pointer; transition: background-color .2s, color .2s; } .ds-tab:hover { background: rgb(255 255 255 / 0.8); color: #2d2420; } .ds-tab.is-active { background: #2d2420; color: #fff; } .ds-tab:focus-visible { outline: 2px solid #8a5f3c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Delivery Note",
+      "kind": "custom",
+      "refersTo": "delivery-note",
+      "description": "Caramel-milk note shown before and after payment about the delivery fee.",
+      "html": "<div class=\"ds-note\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm-4,48a12,12,0,1,1-12,12A12,12,0,0,1,124,72Zm12,112a16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40a8,8,0,0,1,0,16Z\"/></svg><p><strong>Delivery fee is not included.</strong> The rider will call you with the fee before delivery.</p></div>",
+      "css": ".ds-note { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 16px; background: #f3e4d6; border: 1px solid rgb(138 95 60 / 0.22); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 14px; line-height: 1.5; color: #57473d; max-width: 420px; } .ds-note svg { color: #8a5f3c; margin-top: 1px; } .ds-note p { margin: 0; } .ds-note strong { color: #2d2420; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Sugared Glass",
+    "overview": "JLC is a bright, modern phone-first shop seen through frosted glass. Behind every page sits one fixed, non-scrolling field of soft colour blobs (blush, rose, caramel, sand, honey) on a cream ground. Every surface the shopper touches (top bar, cards, bag drawer, checkout, notices, admin panels) is a white frosted panel laid over that field, so the warmth comes from what the glass refracts, not from painted surfaces. The products bring the only other colour: each product card samples the dominant vivid hue of its own photo and tints and glows in it.\n\nThe type is one family, Archivo, pushed wide (108% width) and heavy (780) with tight negative tracking for headings, and kept plain and sentence case everywhere else. Every control is a pill. Ink (espresso) carries navigation and the Add action; deep caramel is reserved for the primary purchase path and focus. Light theme only.\n\nThe world rejects the beige serif boutique and the dark luxury counter. The jlc script logo is a binding brand asset and appears as the ink raster (`public/brand/jlc-mark-ink.png`, `public/brand/jlc-wordmark-ink-lg.png`), never redrawn.",
+    "keyCharacteristics": [
+      "Fixed warm colour field behind all pages; frosted white glass in front of it.",
+      "Product cards tinted and glowing in the colour sampled from their own photo.",
+      "Archivo Variable, wide and heavy for display, sentence case throughout.",
+      "Three radii (panel 22px, media 16px, input 14px); every control a pill.",
+      "Ink for navigation and Add, deep caramel for the primary action, honey and blush for small highlights.",
+      "Light theme only."
+    ],
+    "rules": [
+      {
+        "name": "The Field-Behind-Glass Rule",
+        "body": "Warm colour lives in the fixed background field and in sampled product swatches. Panels are white glass; never paint a panel caramel or blush to add warmth.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Inks Rule",
+        "body": "Espresso is for navigation and adding; deep caramel is for paying and focus. Do not introduce a third action colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Own-Colour Rule",
+        "body": "A product card's tint and glow come only from its own photo's sampled swatch. Never assign card colours by hand or by category.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "No uppercase labels and no letter-spaced small caps anywhere. Weight and width carry hierarchy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Money Rule",
+        "body": "Prices, totals, counts and quantities always use tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Glass Recipe Rule",
+        "body": "Every surface uses the same glass recipe. A new panel joins the shared glass list; it does not invent its own blur, border or shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Glow Is Earned Rule",
+        "body": "Coloured glow belongs to product cards only, in their own swatch. Other panels keep the neutral warm shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the fixed warm colour field behind every page, including admin, and put every surface on the shared glass recipe.",
+      "Do tint and glow product cards only from the colour sampled from their own photo, falling back to the caramel swatch.",
+      "Do use the jlc ink rasters for the logo; keep the mark at 42px in the top bar (34px on phones).",
+      "Do make every control a pill and keep panels 22px, media 16px, inputs 14px.",
+      "Do reserve deep caramel for the purchase path and focus; use espresso pills for navigation and Add.",
+      "Do set headings in Archivo at 108% width, weight 780, tight tracking, sentence case.",
+      "Do keep warm brown shadows and the white inner top highlight on glass.",
+      "Do honour reduced transparency (solid white) and reduced motion."
+    ],
+    "donts": [
+      "Don't add a dark theme or dark surfaces beyond the espresso pills, announcement strip and toast.",
+      "Don't replace the warm beige, caramel and blush palette with saturated or cool colours.",
+      "Don't paint panels with field colours or assign product colours by hand.",
+      "Don't use serif display type, uppercase labels or letter-spaced small caps.",
+      "Don't use grey or hard offset shadows.",
+      "Don't redraw, recolour or replace the jlc logo."
+    ]
+  }
+}

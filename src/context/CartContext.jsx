@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { effectivePrice } from '../../shared/pricing';
 
 const CartContext = createContext();
 
@@ -54,7 +55,7 @@ export function CartProvider({ children }) {
   function getSubtotal(products) {
     return cart.reduce((sum, item) => {
       const p = products.find(pr => pr.id === item.id);
-      return sum + (p ? p.price * item.qty : 0);
+      return sum + (p ? effectivePrice(p) * item.qty : 0);
     }, 0);
   }
 

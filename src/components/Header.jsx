@@ -1,45 +1,47 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useSearchParams } from 'react-router-dom';
+import { ShoppingBag, Package } from '@phosphor-icons/react';
 import { useCart } from '../context/CartContext';
+import { CATEGORIES } from '../lib/format';
 
-const CATS = [
-  { key: 'all', label: 'All' },
-  { key: 'lip-care', label: 'Lip Care' },
-  { key: 'fragrance', label: 'Fragrance' },
-  { key: 'self-care', label: 'Self Care' },
-];
-
-export default function Header({ activeCategory, onCategoryChange }) {
+export default function Header({ minimal = false }) {
   const { cartCount, setIsOpen } = useCart();
+  const [params] = useSearchParams();
+  const active = params.get('c') || 'all';
 
   return (
-    <header>
-      <div className="header-inner">
-        <Link to="/" className="logo">JLC</Link>
+    <header className="topbar">
+      <div className="topbar-inner">
+        <Link to="/" className="topbar-mark" aria-label="JLC home">
+          <img src="/brand/jlc-mark-ink.png" alt="" width="315" height="180" />
+        </Link>
 
-        <nav className="header-nav" aria-label="Category navigation">
-          {CATS.map(({ key, label }) => (
-            <button
-              key={key}
-              className={`nav-pill ${activeCategory === key ? 'active' : ''}`}
-              onClick={() => onCategoryChange?.(key)}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
+        {!minimal && (
+          <nav className="topbar-nav" aria-label="Categories">
+            {CATEGORIES.map(({ key, label }) => (
+              <NavLink
+                key={key}
+                to={key === 'all' ? '/products' : `/products?c=${key}`}
+                className={({ isActive }) => `topbar-link${isActive && active === key ? ' is-active' : ''}`}
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+        )}
 
-        <div className="header-actions">
-          <button className="cart-btn" onClick={() => setIsOpen(true)} aria-label="Open cart">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-              <path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6" />
-            </svg>
-            Cart
-            {cartCount > 0 && (
-              <span className="cart-count-badge">{cartCount}</span>
-            )}
+        {!minimal && (
+          <div className="topbar-actions">
+            <Link to="/track" className="track-link" aria-label="Track order">
+              <Package size={20} aria-hidden="true" />
+              <span className="track-label">Track order</span>
+            </Link>
+          <button className="bag-btn" onClick={() => setIsOpen(true)} aria-label={`Open bag, ${cartCount} items`}>
+            <ShoppingBag size={20} weight="regular" aria-hidden="true" />
+            <span className="bag-label">Bag</span>
+            {cartCount > 0 && <span className="bag-count">{cartCount}</span>}
           </button>
-        </div>
+          </div>
+        )}
       </div>
     </header>
   );
