@@ -522,7 +522,9 @@ export default function AdminPage() {
   const [signingIn, setSigningIn] = useState(false);
   const [tab, setTab] = useState('products');
 
-  const { products, updateProduct, addProduct: firestoreAdd, deleteProduct: firestoreDelete, resetProducts } = useProducts();
+  const { products, goLive, updateProduct, addProduct: firestoreAdd, deleteProduct: firestoreDelete, resetProducts } = useProducts();
+  // Admin edits must show at once, so switch from the cached catalog to a live Firestore feed.
+  useEffect(() => { goLive(); }, [goLive]);
   const [search, setSearch] = useState('');
   const [showAdd, setShowAdd] = useState(false);
   const [confirm, setConfirm] = useState(null);

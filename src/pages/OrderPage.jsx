@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { CheckCircle, WarningCircle, WhatsappLogo, HourglassMedium, ArrowClockwise } from '@phosphor-icons/react';
+import { CheckCircle, WarningCircle, WhatsappLogo, HourglassMedium, ArrowClockwise, ArrowLeft } from '@phosphor-icons/react';
 import Shell from '../components/Shell';
 import DeliveryNote from '../components/DeliveryNote';
 import { useCart } from '../context/CartContext';
@@ -150,7 +150,10 @@ export default function OrderPage() {
 
   return (
     <Shell minimal>
-      <div className="notice" aria-live="polite">{body}</div>
+      <div className="notice" aria-live="polite">
+        <Link to="/" className="back-link"><ArrowLeft size={16} aria-hidden="true" /> Back to shop</Link>
+        {body}
+      </div>
     </Shell>
   );
 }

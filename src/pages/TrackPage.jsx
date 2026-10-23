@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package } from '@phosphor-icons/react';
+import { Package, ArrowLeft } from '@phosphor-icons/react';
 import Shell from '../components/Shell';
 
 export default function TrackPage() {
@@ -32,6 +32,7 @@ export default function TrackPage() {
   return (
     <Shell>
       <div className="notice">
+        <Link to="/" className="back-link"><ArrowLeft size={16} aria-hidden="true" /> Back to shop</Link>
         <Package size={40} weight="thin" aria-hidden="true" />
         <h1 className="display notice-title">Track your order</h1>
         <p>Enter the order code from your order page and the phone number you used at checkout.</p>

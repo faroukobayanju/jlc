@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { WhatsappLogo } from '@phosphor-icons/react';
+import { WhatsappLogo, ArrowLeft } from '@phosphor-icons/react';
 import Shell from '../components/Shell';
 import { WHATSAPP_NUMBER } from '../config';
 
@@ -42,6 +42,7 @@ export default function FaqPage() {
   return (
     <Shell>
       <div className="faq">
+        <Link to="/" className="back-link"><ArrowLeft size={16} aria-hidden="true" /> Back to shop</Link>
         <h1 className="display faq-title">How to shop JLC</h1>
         <div className="faq-list">
           {FAQS.map(({ q, a }) => (
