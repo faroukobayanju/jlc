@@ -6,8 +6,6 @@ import Announcement from './Announcement';
 import { WHATSAPP_NUMBER } from '../config';
 import { CATEGORIES } from '../lib/format';
 
-// 2349160228944 -> +234 916 022 8944
-const WHATSAPP_DISPLAY = `+${WHATSAPP_NUMBER.replace(/^(\d{3})(\d{3})(\d{3})(\d+)$/, '$1 $2 $3 $4')}`;
 
 export default function Shell({ children, minimal = false }) {
   return (
@@ -20,12 +18,9 @@ export default function Shell({ children, minimal = false }) {
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <img className="footer-mark" src="/brand/jlc-wordmark-ink-lg.png" alt="JLC, Jay's Lip Care and more" width="1260" height="720" loading="lazy" />
-            <p className="footer-about">Lip care, fragrance and little self-care treats, picked by Jay.</p>
             <a className="btn btn-solid footer-wa" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">
               <WhatsappLogo size={18} aria-hidden="true" /> Chat with Jay
             </a>
-            <p className="footer-phone">{WHATSAPP_DISPLAY}</p>
           </div>
           <nav className="footer-col" aria-label="Shop">
             <h2 className="footer-head">Shop</h2>
@@ -40,10 +35,6 @@ export default function Shell({ children, minimal = false }) {
             <Link to="/faq">How to order</Link>
             <Link to="/faq">Delivery fees</Link>
           </nav>
-          <div className="footer-base">
-            <span>© {new Date().getFullYear()} JLC, Jay's Lip Care and more.</span>
-            <span>Delivery fees are paid to the rider.</span>
-          </div>
         </div>
       </footer>
     </>

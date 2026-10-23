@@ -436,19 +436,11 @@ input, textarea, select { font: inherit; color: inherit; }
   display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 32px clamp(24px, 4vw, 64px);
   border-radius: var(--r-panel);
 }
-.footer-brand { display: grid; gap: 14px; justify-items: start; align-content: start; }
-.footer-mark { width: min(220px, 60vw); height: auto; }
-.footer-about { color: var(--text-2); max-width: 34ch; }
-.footer-wa { margin-top: 4px; }
-.footer-phone { font-size: 14px; font-weight: 600; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.footer-brand { display: grid; justify-items: start; align-content: start; }
 .footer-col { display: grid; gap: 10px; align-content: start; font-size: 15px; font-weight: 600; color: var(--text-2); }
 .footer-col a { width: max-content; transition: color 0.2s; }
 .footer-col a:hover { color: var(--accent-hover); }
 .footer-head { font-size: 13px; font-weight: 700; color: var(--text-3); margin-bottom: 4px; }
-.footer-base {
-  grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
-  padding-top: 20px; border-top: 1px solid var(--glass-edge); font-size: 13px; color: var(--text-3);
-}
 
 /* ===== bag drawer ===== */
 .scrim {
